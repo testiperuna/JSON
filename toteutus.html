@@ -77,29 +77,37 @@
         function kerro(obj) {
           let tiedot =
             "<center><h3>" +
+            //Lisätään toteutuksen nimi
             "Toteutuksen nimi: " +
             obj.toteutuksen_nimi +
             "<br><hr>" +
             "</h3>" +
             "<br>" +
+            //Lisätään osallistujien lukumäärä
             "Osallistujien lukumäärä: " +
             obj.osallistujien_lukumaara +
             "<br>" +
+            //Lisätään osallistujat
             "Osallistujat: " +
             obj.osallistujat +
             "<br>" +
+            //Lisätään toteutuksen alkamis- ja loppumisaika
             "Toteutuksen alkamis- ja loppumisaika: " +
             obj.toteutuksen_alkamis_ja_loppumisaika +
             "<br>" +
+            //Lisätään toteutuksen kesto viikkoina
             "Toteutuksen kesto viikkoina: " +
             obj.toteutuksen_kesto_viikkoina +
             "<br>" +
             "<p><img src=" +
+            //Lisätään kuva
             obj.kuva +
             "></p>" +
             "<br></center>";
 
           tiedot += "</p>";
+
+          //Tulostetaan tiedot sivulle
 
           document.getElementById("vastaus").innerHTML = tiedot;
         }
