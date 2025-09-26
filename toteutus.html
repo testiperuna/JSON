@@ -55,7 +55,7 @@
 
       <script>
         // Haetaan tiedot json-tiedostosta
-        fetch("tanjis.json")
+        fetch("toteutus.json")
           //Sitten muunnetaan vastaus oliomuotoon
           .then(function (response) {
             return response.json();
@@ -76,42 +76,29 @@
 
         function kerro(obj) {
           let tiedot =
-            "<h1>" +
-            obj.otsikko +
-            "</h1><br>" +
-            obj.kuvaus +
+            "<center><h3>" +
+            "Toteutuksen nimi: " +
+            obj.toteutuksen_nimi +
             "<br><hr>" +
-            //kuvan määritys
+            "</h3>" +
+            "<br>" +
+            "Osallistujien lukumäärä: " +
+            obj.osallistujien_lukumaara +
+            "<br>" +
+            "Osallistujat: " +
+            obj.osallistujat +
+            "<br>" +
+            "Toteutuksen alkamis- ja loppumisaika: " +
+            obj.toteutuksen_alkamis_ja_loppumisaika +
+            "<br>" +
+            "Toteutuksen kesto viikkoina: " +
+            obj.toteutuksen_kesto_viikkoina +
+            "<br>" +
             "<p><img src=" +
             obj.kuva +
             "></p>" +
-            //seuraava osuus
-            "<center><h3>" +
-            "Opintojakso" +
-            "</h3>" +
-            "Nimi: " +
-            obj.opintojakso.nimi +
-            "<br>" +
-            "Tunnus: " +
-            obj.opintojakso.tunnus +
-            "<br>" +
-            "Opintopisteet: " +
-            obj.opintojakso.opintopisteet +
             "<br></center>";
 
-          tiedot += "<p><h3> Aiheet </h3>";
-
-          //Linkit sivulle
-          for (var i = 0; i < obj.tekniikat.length; i++) {
-            tiedot += "<b>Aihe: " + obj.tekniikat[i].aihe + "</b>";
-            tiedot +=
-              " <a href=" +
-              obj.tekniikat[i].linkki +
-              ">" +
-              obj.tekniikat[i].linkki +
-              "</a>" +
-              "<br>";
-          }
           tiedot += "</p>";
 
           document.getElementById("vastaus").innerHTML = tiedot;
