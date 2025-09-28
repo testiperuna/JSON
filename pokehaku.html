@@ -57,8 +57,14 @@
       <button onclick="poke()">Hae</button><br>
     
       <div id="nimi">Kirjoita laatikkoon Pokemonin nimi</div>
+    <p id="omi1"></p>
+    <p id="omi2"></p>
+    <p id="omi3"></p>
+    <p id="käännä-painike"></p>
     <p id="kuva2"></p>
     </p>
+
+
 
     <!-- Kirjoitetaan funktio poke(), jota kutsutaan kun painetaan hae-painiketta -->
     
@@ -93,15 +99,59 @@
 
           //Tallennetaan muuttujan linkki josta löytty Poken kuva
             let pokeurl = obj.sprites.front_default;
-            console.log(pokeurl);
 
           //Kirjoitetaan kuva, ja nimi sivulla sekä tyhyjennetään hakukenttä
             document.getElementById("kuva2").innerHTML = "<img src=" + pokeurl + ">";
-            document.getElementById("nimi").innerHTML = "<b>" + name + "</b>";
-            document.getElementById("pokemonName").value = "";
+            document.getElementById("nimi").innerHTML = name;
+
+            //Lisätään käännä-painikkeen ilmestyminen
+            document.getElementById("käännä-painike").innerHTML = "<button onclick='kaanna()'>Käännä</button>"
+
+            //Lisätään tieto pituudesta
+            document.getElementById("omi1").innerHTML = "<b>Height: </b>" + obj.height;
+
+            //Lisätään tieto id-numerosta
+            document.getElementById("omi2").innerHTML = "<b>ID: </b>" + obj.id;
+
+            //Lisätään tieto painosta
+            document.getElementById("omi3").innerHTML = "<b>Weight: </b>" + obj.weight;
         }
       }
-    </script>
 
+    //tehdään käännä-funktio, jolla pokemon kääntyy selin
+    function kaanna() {
+
+      //HAetaan pokemonin nimi
+      const pokeName = document.getElementById("pokemonName").value.toLowerCase();
+      
+      //Tallennetaan myös nimi talteen muuttujaan name
+      let name = document.getElementById("pokemonName").value;
+
+      //Haetaan kirjoitettu pokemon
+        fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
+
+      //Muunnetaan vastaus JSON-muotoon
+        .then(function (response) {
+          return response.json();
+        })
+
+        //Käsitellään muunnettu (eli JSON muotoinen) vastaus
+        //Kutsutaan funktiota kerro() ja välitetään sille json-vastaus
+        .then(function (responseJson) {
+          pokekuva(responseJson);
+        })
+
+        //Määritellään funktio pokekuva(obj)
+          function pokekuva(obj) {
+
+        //Tallennetaan muuttujan linkki josta löytty Poken kuva
+           let pokeurl = obj.sprites.back_default;
+
+        //korvataan edellinen kuva uudella ja tyhjennetään hakukenttä
+            document.getElementById("kuva2").innerHTML = "<img src=" + pokeurl + ">";
+            document.getElementById("pokemonName").value = "";
+      }
+    }
+    </script>
   </body>
 </html>
